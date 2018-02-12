@@ -80,26 +80,30 @@ public class TicTacToe implements ITicTacToe {
         int moveLocation = 0;
         boolean moveFound = false;
         int count = 0;
+        int count2=0;
 
         //check if oponnet is winning
-        //right diagonal
+        //right
         count = 0;
-        for(int i = 0; i < 3; i++){
-            if(board[i][2-i] == 1){
-                count++;
+        if(moveFound == false){
+            for(int i = 0; i < 3; i++){
+                if(board[i][2-i] == 1){
+                    count++;
+                }
+
+                if(board[i][2-i] == 0){
+                    moveLocation = returnLocation(i, 2-i);
+                }
             }
 
-            if(board[i][2-i] == 0){
-                moveLocation = returnLocation(i, 2-i);
+            if(count == 2 && getCellStatus(moveLocation)){
+                moveFound = true;
             }
-        }
 
-        if(count == 2){
-            moveFound = true;
         }
 
 
-        //left diagonal
+        //left
         if(moveFound == false){
             count = 0;
             for(int i = 0; i < 3; i++){
@@ -111,41 +115,42 @@ public class TicTacToe implements ITicTacToe {
                     moveLocation = returnLocation(i, i);
                 }
             }
-        }
 
-        if(count == 2){
-            moveFound = true;
+
+            if(count == 2 && getCellStatus(moveLocation)){
+                moveFound = true;
+            }
         }
 
 
 
         //rows
         count = 0;
-        int count2 = 0;
-        if(!moveFound) {
-            for (int i = 0; i < 3; i++) {
+        count2 = 0;
+        if(moveFound == false){
+            for(int i = 0; i < 3; i++){
                 count = 0;
-                for (int j = 0; j < 3; j++) {
-                    if (board[i][j] == 1) {
+                for(int j = 0; j < 3; j++){
+                    if(board[i][j] == 1){
                         count++;
                     }
 
                 }
 
-                if (count == 2) {
-                    for (int j = 0; j < 3; j++) {
-                        if (board[i][j] == 2) {
+                if(count == 2){
+                    for(int j = 0; j<3; j++){
+                        if(board[i][j]== 2){
                             count2++;
                         }
 
-                        if (board[i][j] == 0) {
-                            moveLocation = returnLocation(i, j);
+                        if(board[i][j] == 0){
+                            moveLocation = returnLocation(i,j);
                         }
                     }
 
                 }
 
-                if (count == 2 & count2 == 0) {
+                if(count == 2 & count2 == 0 && getCellStatus(moveLocation)){
                     moveFound = true;
                     break;
                 }
@@ -153,33 +158,34 @@ public class TicTacToe implements ITicTacToe {
             }
         }
 
+
         //columns
         count = 0;
         count2 = 0;
-        if(!moveFound) {
-            for (int i = 0; i < 3; i++) {
+        if(moveFound == false){
+            for(int i = 0; i < 3; i++){
                 count = 0;
-                for (int j = 0; j < 3; j++) {
-                    if (board[j][i] == 1) {
+                for(int j = 0; j < 3; j++){
+                    if(board[j][i] == 1){
                         count++;
                     }
 
                 }
 
-                if (count == 2) {
-                    for (int j = 0; j < 3; j++) {
-                        if (board[j][i] == 2) {
+                if(count == 2){
+                    for(int j = 0; j<3; j++){
+                        if(board[j][i]== 2){
                             count2++;
                         }
 
-                        if (board[j][i] == 0) {
-                            moveLocation = returnLocation(j, i);
+                        if(board[j][i] == 0){
+                            moveLocation = returnLocation(j,i);
                         }
                     }
 
                 }
 
-                if (count == 2 & count2 == 0) {
+                if(count == 2 & count2 == 0 && getCellStatus(moveLocation)){
                     moveFound = true;
                     break;
                 }
@@ -191,6 +197,7 @@ public class TicTacToe implements ITicTacToe {
 
         //do prefered moves if the previous options dont yeild a move
         //set the best preferred moves
+
 
         if(moveFound == false){
             bestMoves[0] = 4;

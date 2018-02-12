@@ -18,7 +18,7 @@ public class StartActivity extends AppCompatActivity {
 
     public void onStartClick(View view){
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("playerName", _name.getText());
+        intent.putExtra("playerName", _name.getText().toString());
         startActivityForResult(intent, 2);
     }
 }

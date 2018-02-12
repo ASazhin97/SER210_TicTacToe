@@ -49,7 +49,8 @@ public class GameActivity extends Activity {
         TTTboard = new TicTacToe();
 
         _name = getIntent().getStringExtra("playerName");
-        _promptView.setText(_name);
+        Log.d("name of player", "name is" + _name);
+        _promptView.setText("Hello "+ _name + "! Click to play!");
 
 
         //set up array
@@ -70,7 +71,9 @@ public class GameActivity extends Activity {
 
     public void changePrompt(){
         if(_isPlayerTurn){
-            //_promptView.setText("It is YOur turn")
+            _promptView.setText("It is YOur turn");
+        } else {
+            _promptView.setText("It is the computers turn!");
         }
     }
 
@@ -79,6 +82,7 @@ public class GameActivity extends Activity {
             for (int i = 0; i < 9; i++) {
                 if (view == buttonArray[i] && TTTboard.getCellStatus(i)) {
                     buttonArray[i].setBackgroundResource(R.drawable.cross);
+                    _move = i;
                     playStep(_move);
                 }
             }
@@ -97,6 +101,7 @@ public class GameActivity extends Activity {
             compMove = TTTboard.getComputerMove();
             TTTboard.setMove(2, compMove);
             //_promptView.setText(compMove);
+            Log.d("ComputerMove", Integer.toString(compMove));
 
             switch (compMove) {
                 case 0:
@@ -129,12 +134,15 @@ public class GameActivity extends Activity {
 
 
             }
-        } else if (TTTboard.checkForWinner() == 1) {
+        }
+        if (TTTboard.checkForWinner() == 1) {
             _promptView.setText("It is a tie");
-        } else if(TTTboard.checkForWinner() == 2){
+        }
+        if(TTTboard.checkForWinner() == 2) {
             _promptView.setText("Cross Won!");
-        } else if(TTTboard.checkForWinner() == 3){
-            _promptView.setText("Naught WOn!");
+        }
+        if(TTTboard.checkForWinner() == 3){
+            _promptView.setText("Naught Won!");
         }
     }
 }
