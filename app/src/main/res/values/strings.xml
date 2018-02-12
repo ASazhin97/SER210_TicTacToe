@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SER210_TicTacToe</string>
+    <string name="promptString">Your turn</string>
+    <string name="boardImage">Board Image</string>
+    <string name="gameTitle">Tic Tac Toe</string>
+    <string name="tie">It is a tie!</string>
+    <string name="cross">Cross Won!</string>
+    <string name="naught">Naught Won!</string>
+</resources>
