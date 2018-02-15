@@ -28,12 +28,16 @@ public class GameActivity extends Activity {
     ImageButton[] buttonArray;
     String _name;
 
+    int[] board;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
 
         //SET UP YOUR VARIABLES
         _promptView = (TextView) findViewById(R.id.prompt);
@@ -66,7 +70,19 @@ public class GameActivity extends Activity {
         buttonArray[7] = _button21;
         buttonArray[8] = _button22;
 
+        if(savedInstanceState != null){
+            TTTboard.setBoard(savedInstanceState.getIntArray("boardArray"));
+            board = TTTboard.getBoard();
+            for(int i = 0; i<board.length; i++){
+                if(board[i] == 1){
+                    buttonArray[i].setBackgroundResource(R.drawable.cross);
+                }
 
+                if(board[i] == 2){
+                    buttonArray[i].setBackgroundResource(R.drawable.circle);
+                }
+            }
+        }
     }
 
     public void changePrompt(){
@@ -103,37 +119,8 @@ public class GameActivity extends Activity {
             //_promptView.setText(compMove);
             Log.d("ComputerMove", Integer.toString(compMove));
 
-            switch (compMove) {
-                case 0:
-                    _button00.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 1:
-                    _button01.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 2:
-                    _button02.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 3:
-                    _button10.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 4:
-                    _button11.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 5:
-                    _button12.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 6:
-                    _button20.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 7:
-                    _button21.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
-                case 8:
-                    _button22.setBackgroundResource(R.drawable.ic_launcher_background);
-                    break;
+            buttonArray[compMove].setBackgroundResource(R.drawable.circle);
 
-
-            }
         }
         if (TTTboard.checkForWinner() == 1) {
             _promptView.setText("It is a tie");
@@ -144,5 +131,21 @@ public class GameActivity extends Activity {
         if(TTTboard.checkForWinner() == 3){
             _promptView.setText("Naught Won!");
         }
+    }
+
+    //making the board stay when flipped
+    @Override
+    public void onSaveInstanceState(Bundle savedInstantceState){
+        super.onSaveInstanceState(savedInstantceState);
+        board = TTTboard.getBoard();
+        savedInstantceState.putIntArray("boardArray", board);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+    }
+    public void onStart(){
+        super.onStart();
     }
 }

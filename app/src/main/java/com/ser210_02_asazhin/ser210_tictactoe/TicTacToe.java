@@ -23,6 +23,29 @@ public class TicTacToe implements ITicTacToe {
         board = new int[ROWS][COLS];
     }
 
+    public int[] getBoard(){
+        int[] boardArray = new int[9];
+        int a = 0;
+        for(int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                boardArray[a] = board[i][j];
+                a++;
+            }
+        }
+
+        return boardArray;
+    }
+
+    public void setBoard(int[] newBoard){
+        int a = 0;
+        for(int i = 0; i<3; i++){
+            for(int j = 0; j < 3 ; j++){
+                board[i][j] = newBoard[a];
+                a++;
+            }
+        }
+    }
+
     @Override
     public void setMove(int player, int location) {
         // TODO Auto-generated method stub

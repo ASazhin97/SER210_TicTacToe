@@ -13,7 +13,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
-        android:text="Welcome!" />
+        android:text="Welcome!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <EditText
         android:id="@+id/editText"
@@ -33,4 +34,16 @@
         android:layout_marginBottom="57dp"
         android:text="START"
         android:onClick="onStartClick"/>
+
+    <EditText
+        android:id="@+id/splashText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="You play the Crosses, get three in a row to win!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 </RelativeLayout>
