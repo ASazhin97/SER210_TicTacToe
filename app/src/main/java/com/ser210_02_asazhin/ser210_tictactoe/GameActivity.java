@@ -14,15 +14,7 @@ public class GameActivity extends Activity {
     //VARIABLES
     Boolean _isPlayerTurn;
     TextView _promptView;
-    ImageButton _button00;
-    ImageButton _button01;
-    ImageButton _button02;
-    ImageButton _button10;
-    ImageButton _button11;
-    ImageButton _button12;
-    ImageButton _button20;
-    ImageButton _button21;
-    ImageButton _button22;
+
     int _move;
     TicTacToe TTTboard;
     ImageButton[] buttonArray;
@@ -41,15 +33,6 @@ public class GameActivity extends Activity {
 
         //SET UP YOUR VARIABLES
         _promptView = (TextView) findViewById(R.id.prompt);
-        _button00 = (ImageButton) findViewById(R.id.button00);
-        _button01 = (ImageButton) findViewById(R.id.button01);
-        _button02 = (ImageButton) findViewById(R.id.button02);
-        _button10 = (ImageButton) findViewById(R.id.button10);
-        _button11 = (ImageButton) findViewById(R.id.button11);
-        _button12 = (ImageButton) findViewById(R.id.button12);
-        _button20 = (ImageButton) findViewById(R.id.button20);
-        _button21 = (ImageButton) findViewById(R.id.button21);
-        _button22 = (ImageButton) findViewById(R.id.button22);
         TTTboard = new TicTacToe();
 
         _name = getIntent().getStringExtra("playerName");
@@ -60,16 +43,20 @@ public class GameActivity extends Activity {
         //set up array
 
         buttonArray = new ImageButton[9];
-        buttonArray[0] = _button00;
-        buttonArray[1] = _button01;
-        buttonArray[2] = _button02;
-        buttonArray[3] = _button10;
-        buttonArray[4] = _button11;
-        buttonArray[5] = _button12;
-        buttonArray[6] = _button20;
-        buttonArray[7] = _button21;
-        buttonArray[8] = _button22;
+        buttonArray[0] = (ImageButton) findViewById(R.id.button00);
+        buttonArray[1] = (ImageButton) findViewById(R.id.button01);
+        buttonArray[2] = (ImageButton) findViewById(R.id.button02);
+        buttonArray[3] = (ImageButton) findViewById(R.id.button10);
+        buttonArray[4] = (ImageButton) findViewById(R.id.button11);
+        buttonArray[5] = (ImageButton) findViewById(R.id.button12);
+        buttonArray[6] = (ImageButton) findViewById(R.id.button20);
+        buttonArray[7] = (ImageButton) findViewById(R.id.button21);
+        buttonArray[8] = (ImageButton) findViewById(R.id.button22);
 
+        /*
+        This saved instance makes sure that the screen stays
+        when the phone is flipped
+         */
         if(savedInstanceState != null){
             TTTboard.setBoard(savedInstanceState.getIntArray("boardArray"));
             board = TTTboard.getBoard();
@@ -85,15 +72,12 @@ public class GameActivity extends Activity {
         }
     }
 
-    public void changePrompt(){
-        if(_isPlayerTurn){
-            _promptView.setText("It is YOur turn");
-        } else {
-            _promptView.setText("It is the computers turn!");
-        }
-    }
 
     public void onButtonClick(View view){
+        /*
+        When clicked in valid spot change image and report to the TTTboard
+        to do the back end
+         */
         if(TTTboard.checkForWinner() == 0) {
             for (int i = 0; i < 9; i++) {
                 if (view == buttonArray[i] && TTTboard.getCellStatus(i)) {
@@ -108,7 +92,31 @@ public class GameActivity extends Activity {
 
     }
 
+    public void onResetClick(View view){
+        /*
+        If clicked on reset
+        and the board is full
+        put a an array of all zeores into the
+        board array
+        and change all the images to white
+         */
+        int[] nullBoard = new int[9];
+        if(TTTboard.checkForWinner() != 0) {
+            for (int i = 0; i < 9; i++) {
+                buttonArray[i].setBackgroundResource(R.drawable.white);
+            }
+            TTTboard.setBoard(nullBoard);
+            _promptView.setText("Play again!");
+        }
+
+    }
+
     public void playStep(int playerMove) {
+        /*
+        Every time the a button is pressed in a valid grid
+        you make the computer play its own move
+        then check for the winner again
+         */
         int compMove = 0;
         TTTboard.setMove(1, playerMove);
 
@@ -141,11 +149,4 @@ public class GameActivity extends Activity {
         savedInstantceState.putIntArray("boardArray", board);
     }
 
-    @Override
-    public void onStop(){
-        super.onStop();
-    }
-    public void onStart(){
-        super.onStart();
-    }
 }

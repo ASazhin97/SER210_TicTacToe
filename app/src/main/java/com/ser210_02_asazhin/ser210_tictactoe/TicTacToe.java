@@ -17,12 +17,20 @@ public class TicTacToe implements ITicTacToe {
     public TicTacToe(){
 
     }
+
+    /*
+    this cleares the array to start new match
+     */
     @Override
     public void clearBoard() {
         // TODO Auto-generated method stub
         board = new int[ROWS][COLS];
     }
 
+    /*
+    this transforms the board array into a single array
+    to give to the front end for saving
+     */
     public int[] getBoard(){
         int[] boardArray = new int[9];
         int a = 0;
@@ -36,6 +44,11 @@ public class TicTacToe implements ITicTacToe {
         return boardArray;
     }
 
+    /*
+    This takes the single array from the save,
+    and turns it in to the two dimensional array
+    to bring back the game
+     */
     public void setBoard(int[] newBoard){
         int a = 0;
         for(int i = 0; i<3; i++){
@@ -46,6 +59,9 @@ public class TicTacToe implements ITicTacToe {
         }
     }
 
+    /*
+    This sets the players move into the array
+     */
     @Override
     public void setMove(int player, int location) {
         // TODO Auto-generated method stub
@@ -65,6 +81,10 @@ public class TicTacToe implements ITicTacToe {
         }
     }
 
+    /*
+    This returns if the cell is empty or not, used
+    to tell if another element can be put there
+     */
     public boolean getCellStatus(int location){
         boolean cellEmpty = true;
         int row = location/3;
@@ -78,6 +98,10 @@ public class TicTacToe implements ITicTacToe {
         return cellEmpty;
     }
 
+    /*
+    this return the single 0-8 location
+    from being the 2 dimensional loc
+     */
     public int returnLocation(int a, int b){
         int Loc = 0;
 
@@ -95,6 +119,12 @@ public class TicTacToe implements ITicTacToe {
         return Loc;
     }
 
+    /*
+    This calculates the move of the computer
+    it checks if the player is about to win and stops it.
+    If the player is not allowed to win it follows an
+    optimal pattern
+     */
     @Override
     public int getComputerMove() {
         // TODO Auto-generated method stub
@@ -253,6 +283,10 @@ public class TicTacToe implements ITicTacToe {
 
     }
 
+    /*
+    Checks for the winner of the match,
+    and returns a draw if no winner and the board is full
+     */
     @Override
     public int checkForWinner() {
 
@@ -332,48 +366,20 @@ public class TicTacToe implements ITicTacToe {
 
         //if no winner found, check if the board is full
         int slotsLeft = 9;
-        for(int i = 0; i<9; i++){
-            if(!getCellStatus(i)){
-                slotsLeft--;
+        if(winner == 0) {
+            for (int i = 0; i < 9; i++) {
+                if (!getCellStatus(i)) {
+                    slotsLeft--;
+                }
             }
-        }
 
-        if(slotsLeft == 0){
-            winner = 1;
+            if (slotsLeft == 0) {
+                winner = 1;
+            }
         }
 
         return winner;
     }
 
-    /**
-     *  Print the game board
-     */
-//    public  void printBoard() {
-//        for (int row = 0; row < ROWS; ++row) {
-//            for (int col = 0; col < COLS; ++col) {
-//                printCell(board[row][col]); // print each of the cells
-//                if (col != COLS - 1) {
-//                    System.out.print("|");   // print vertical partition
-//                }
-//            }
-//            System.out.println();
-//            if (row != ROWS - 1) {
-//                System.out.println("-----------"); // print horizontal partition
-//            }
-//        }
-//        System.out.println();
-//    }
-//
-//    /**
-//     * Print a cell with the specified "content"
-//     * @param content either CROSS, NOUGHT or EMPTY
-//     */
-//    public  void printCell(int content) {
-//        switch (content) {
-//            case EMPTY:  System.out.print("   "); break;
-//            case NOUGHT: System.out.print(" O "); break;
-//            case CROSS:  System.out.print(" X "); break;
-//        }
-//    }
 
 }

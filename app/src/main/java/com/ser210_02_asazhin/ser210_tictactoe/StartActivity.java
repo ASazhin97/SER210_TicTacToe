@@ -16,6 +16,10 @@ public class StartActivity extends AppCompatActivity {
         _name = (EditText) findViewById(R.id.editText);
     }
 
+    /*
+    On clickcing of the start button it takes the text from the
+    edit view and puts it into an intent for the GameActivity to take
+     */
     public void onStartClick(View view){
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("playerName", _name.getText().toString());

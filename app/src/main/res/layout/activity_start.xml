@@ -35,15 +35,28 @@
         android:text="START"
         android:onClick="onStartClick"/>
 
-    <EditText
-        android:id="@+id/splashText"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_above="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="You play the Crosses, get three in a row to win!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+        android:text="To win get three in a a row" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/tictactoe" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="Press Start to Play" />
+
 </RelativeLayout>

@@ -13,6 +13,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/gameTitle"
+        android:layout_margin="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:gravity="top" />
 
     <GridLayout
@@ -129,6 +131,12 @@
         android:layout_height="wrap_content"
         android:text="@string/promptString"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Reset"
+        android:onClick="onResetClick"/>
 
 
 </LinearLayout>
